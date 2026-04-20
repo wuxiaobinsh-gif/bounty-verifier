@@ -1,0 +1,48 @@
+# Bounty Verification Bot - GitHub Action
+# Triggers on issue comments and auto-verifies bounty claims
+
+name: Bounty Claim Verifier
+
+on:
+  issue_comment:
+    types: [created]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  verify-claim:
+    runs-on: ubuntu-latest
+    if: |
+      github.event.issue.pull_request == null &&
+      contains(github.event.comment.body, 'Wallet:') ||
+      contains(github.event.comment.body, 'wallet:') ||
+      contains(github.event.comment.body, 'Stars:') ||
+      contains(github.event.comment.body, 'stars:') ||
+      contains(github.event.comment.body, 'Claiming') ||
+      contains(github.event.comment.body, 'Claiming')
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+        working-directory: .
+
+      - name: Run verification
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RUSTCHAIN_NODE_URL: ${{ secrets.RUSTCHAIN_NODE_URL || 'https://50.28.86.131' }}
+        run: python src/main.py
+        working-directory: .
+
+      - name: Write summary
+        if: always()
+        run: echo "Verification complete" >> $GITHUB_STEP_SUMMARY
