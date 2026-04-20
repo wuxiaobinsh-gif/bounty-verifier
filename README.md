@@ -17,9 +17,9 @@ A GitHub Action bot that automatically verifies bounty claim comments on GitHub 
 4. **Duplicate Claim Detection** — Scans previous comments for prior payouts
 5. **Auto-Generated Report** — Posts a formatted verification summary comment
 
-## Quick Start
+## Installation
 
-1. Copy `.github/workflows/verify-claim.yml` to your repo
+1. Copy `action-workflow.yml` to `.github/workflows/verify-claim.yml` in your repo
 2. Set repository secrets:
    - `GITHUB_TOKEN` (auto-provided by GitHub)
    - `RUSTCHAIN_NODE_URL` (default: `https://50.28.86.131`)
