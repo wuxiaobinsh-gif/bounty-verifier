@@ -1,0 +1,59 @@
+# Bounty Verification Rules
+# Customize payout rates and thresholds here
+
+rates:
+  # RTC paid per star
+  star: 1.0
+
+  # Bonus for following @Scottcjn
+  follow_bonus: 1.0
+
+  # Minimum stars required to qualify
+  min_stars: 1
+
+  # Article quality bonus
+  article_quality_bonus: 2.0
+
+# Target GitHub account
+target_owner: Scottcjn
+
+# Repos to check for stars
+target_repos:
+  - Rustchain
+  - rustchain-bounties
+  - bottube
+  - beacon-skill
+  - grazer-skill
+  - ram-coffers
+
+# Trigger keywords (case-insensitive)
+trigger_keywords:
+  - "claiming"
+  - "wallet:"
+  - "stars:"
+  - "starred"
+  - "github:"
+  - "bounty claim"
+
+# Duplicate claim settings
+duplicate:
+  # Check previous claims in same issue
+  check_same_issue: true
+  # Check across all bounty issues
+  check_all_issues: true
+  # Grace period (days) for re-claims
+  grace_period_days: 30
+
+# Wallet API
+rustchain_node_url: "https://50.28.86.131"
+
+# Article verification
+articles:
+  # Minimum word count for quality
+  min_word_count: 200
+  # Accepted domains
+  accepted_domains:
+    - dev.to
+    - medium.com
+    - hashnode.dev
+    - blogspot.com
